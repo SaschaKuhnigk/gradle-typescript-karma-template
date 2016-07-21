@@ -1,4 +1,6 @@
 import com.moowork.gradle.node.NodeExtension
+import com.moowork.gradle.node.task.NodeTask
+import com.moowork.gradle.node.task.NpmTask
 import com.moowork.gradle.node.variant.VariantBuilder
 
 plugins {
@@ -49,6 +51,27 @@ compileTypeScript {
     inputs.dir(file("$projectDir/src/test/ts"))
     outputs.dir(file("$projectDir/build/generated-source/main/ts/"))
     outputs.dir(file("$projectDir/build/generated-source/test/ts/"))
+}
+
+
+// karma related settings
+
+def karmaDebug = true;
+def String npmBaseDirName = 'node_modules'
+def karmaBin = project.file("$npmBaseDirName/karma/bin/karma")
+
+project.task('karmaDependencies', type: NpmTask, group: 'Karma', description: 'Installs dependencies needed for running karma tests.') {
+    args = ['install']
+    if (!karmaDebug) {
+        args += ['--silent']
+    }
+    outputs.dir project.file(npmBaseDirName)
+}
+
+project.task('karmaRun', type: NodeTask, dependsOn: ['karmaDependencies'], group: 'Karma',
+         description: 'Executes karma tests') {
+    script = karmaBin
+    args = ['start', "$projectDir/karma.conf.js", '--single-run']
 }
 
 task clean(type: Delete) {
