@@ -22,6 +22,7 @@ Template for creating a typescript project tested with karma.
 # Debug with Intellij
 
 Tested with 2016.1.3 [idea-IU-145.1617.8]
+
 Karma debugging does not work with idea 2016.2.2
 
 * setup [Javascript debugging](https://www.jetbrains.com/help/idea/2016.1/debugging-javascript.html)
