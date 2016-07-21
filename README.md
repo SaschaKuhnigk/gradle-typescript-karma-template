@@ -10,6 +10,7 @@ Template for creating a typescript project tested with karma.
 
 # using the template
 
+```
 $ gradle compileTypeScript # transpile typescript to javascript. javascript files are created in directory $projectDir/build
 
 $ gradle npmInstall        # install node dependencies defined in package.json to $projectDir/node_modules
@@ -17,7 +18,7 @@ $ gradle npmInstall        # install node dependencies defined in package.json t
 $ gradle nodeInstall       # install nodejs to the directory $projectDir/.gradle/nodejs [issue](https://github.com/srs/gradle-node-plugin/issues/91)
 
 $ gradle clean             # deletes the directory $projectDir/build
-
+```
 # Debug with Intellij
 
 Tested with 2016.1.3 [idea-IU-145.1617.8]
