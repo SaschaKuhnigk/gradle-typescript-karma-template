@@ -1,0 +1,56 @@
+import com.moowork.gradle.node.NodeExtension
+import com.moowork.gradle.node.variant.VariantBuilder
+
+plugins {
+    id "com.moowork.node" version "0.13"
+    id "de.richsource.gradle.plugins.typescript" version "1.8.0"
+}
+
+repositories {
+    mavenCentral()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14'
+}
+
+// nodejs related settings
+
+node {
+    version = '5.12.0'
+    npmVersion = '3.10.5'
+    // Base URL for fetching node distributions (change if you have a mirror).
+    distBaseUrl = 'https://nodejs.org/dist'
+    // If true, it will download node using above parameters.
+    // If false, it will try to use globally installed node.
+    download = true
+    // Set the work directory for unpacking node
+    // workaround: https://github.com/srs/gradle-node-plugin/issues/91
+    workDir = file("${projectDir}/.gradle/nodejs")
+    // Set the work directory where node_modules should be located
+    nodeModulesDir = file("${project.projectDir}")
+}
+
+String nodeExecutable() {
+    NodeExtension nodeExt = NodeExtension.get(project)
+    return new VariantBuilder(nodeExt).build().nodeExec
+}
+
+// typescript related settings
+
+compileTypeScript {
+    projectFile = file("$projectDir/tsconfig.json")
+    outputDir = null  // <- huh? some magical default. can`t figure out where the value is set to non null...?
+    compilerExecutable "${nodeExecutable()} node_modules/typescript/lib/tsc.js"
+    dependsOn "npmInstall"
+
+    // make "UP-TO-DATE" checks work... the paths are duplicated with tsconfig.json :(
+    inputs.dir(file("$projectDir/src/main/ts"))
+    inputs.dir(file("$projectDir/src/test/ts"))
+    outputs.dir(file("$projectDir/build/generated-source/main/ts/"))
+    outputs.dir(file("$projectDir/build/generated-source/test/ts/"))
+}
+
+task clean(type: Delete) {
+  delete project.buildDir
+}
