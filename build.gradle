@@ -58,7 +58,7 @@ tasks.getByName("compileTypeScript").group = 'typescript'
 // karma related settings
 
 def karmaDebug = true;
-def String npmBaseDirName = 'node_modules'
+def npmBaseDirName = 'node_modules'
 def karmaBin = project.file("$npmBaseDirName/karma/bin/karma")
 
 project.task('karmaDependencies', type: NpmTask, group: 'Karma', description: 'Installs dependencies needed for running karma tests.') {
