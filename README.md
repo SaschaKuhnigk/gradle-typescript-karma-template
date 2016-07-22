@@ -25,7 +25,7 @@ Template for creating a typescript project tested with karma.
 
 Tested with 2016.1.3 [idea-IU-145.1617.8]
 
-Karma debugging does not work with idea 2016.2.2
+Karma debugging does not work for me with idea 2016.2.2
 
 * setup [Javascript debugging](https://www.jetbrains.com/help/idea/2016.1/debugging-javascript.html)
 * setup [chrome intellij plugin](https://www.jetbrains.com/help/webstorm/2016.1/using-jetbrains-chrome-extension.html)
@@ -35,7 +35,7 @@ Karma debugging does not work with idea 2016.2.2
 * right click on "karma.conf.js" => debug
 * set your breakpoints (GreeterUnitTest.ts)
 * break points are hit on page reload of http://localhost:9876/debug.html (should be open in chrome).
-I don`t know why the break points are not hit if the page load was trigger by intellij.
+Sometimes break points are not hit if a test rerun is triggered by Intellij IDEA. I don`t know why :)
 
 
 

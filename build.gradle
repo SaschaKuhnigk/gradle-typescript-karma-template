@@ -53,6 +53,7 @@ compileTypeScript {
     outputs.dir(file("$projectDir/build/generated-source/test/ts/"))
 }
 
+tasks.getByName("compileTypeScript").group = 'typescript'
 
 // karma related settings
 
