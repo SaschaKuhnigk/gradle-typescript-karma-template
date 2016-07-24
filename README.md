@@ -2,18 +2,12 @@
 
 Template for creating a typescript project tested with karma.
 
-# Plugins used by this template
-
-[gradle-node-plugin](https://github.com/srs/gradle-node-plugin)
-
-[typescript-gradle-plugin](https://github.com/sothmann/typescript-gradle-plugin)
-
 # using the template
 
 ```
-    $ gradle compileTypeScript # transpile typescript to javascript. javascript files are created in directory $projectDir/build
-
     $ gradle karmaRun          # execute tests
+
+    $ gradle compileTypeScript # transpile typescript to javascript. javascript files are created in directory $projectDir/build
 
     $ gradle npmInstall        # install node dependencies defined in package.json to $projectDir/node_modules
 
@@ -37,5 +31,8 @@ Karma debugging does not work for me with idea 2016.2.2
 * break points are hit on page reload of http://localhost:9876/debug.html (should be open in chrome).
 Sometimes break points are not hit if a test rerun is triggered by Intellij IDEA. I don`t know why :)
 
+# Plugins used by this template
 
+[gradle-node-plugin](https://github.com/srs/gradle-node-plugin)
 
+[typescript-gradle-plugin](https://github.com/sothmann/typescript-gradle-plugin)
