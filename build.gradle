@@ -47,8 +47,8 @@ compileTypeScript {
     dependsOn "npmInstall"
 
     // make "UP-TO-DATE" checks work... the paths are duplicated with tsconfig.json :(
-    inputs.dir(file("$projectDir/src/main/ts"))
-    inputs.dir(file("$projectDir/src/test/ts"))
+    inputs.dir(file("$projectDir/src/main/ts/"))
+    inputs.dir(file("$projectDir/src/test/ts/"))
     outputs.dir(file("$projectDir/build/generated-source/main/ts/"))
     outputs.dir(file("$projectDir/build/generated-source/test/ts/"))
 }
@@ -69,11 +69,13 @@ project.task('karmaDependencies', type: NpmTask, group: 'Karma', description: 'I
     outputs.dir project.file(npmBaseDirName)
 }
 
-project.task('karmaRun', type: NodeTask, dependsOn: ['karmaDependencies'], group: 'Karma',
+project.task('karmaRun', type: NodeTask, dependsOn: ['karmaDependencies', 'compileTypeScript'], group: 'Karma',
          description: 'Executes karma tests') {
     script = karmaBin
     args = ['start', "$projectDir/karma.conf.js", '--single-run']
 }
+
+// other
 
 task clean(type: Delete) {
   delete project.buildDir
